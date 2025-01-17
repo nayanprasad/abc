@@ -8,7 +8,7 @@ export default function Home() {
 
     return (
     <div >
-      {/*provider app*/}
+      Event app
       <Button variant={"destructive"} >asdf</Button>
         <Calendar
             mode="single"
