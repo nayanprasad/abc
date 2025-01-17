@@ -34,7 +34,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  apps/buyer-app:
+  apps/event-app:
     dependencies:
       '@repo/ui':
         specifier: workspace:*
@@ -71,7 +71,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  apps/provider-app:
+  apps/landing-page:
     dependencies:
       '@repo/ui':
         specifier: workspace:*
