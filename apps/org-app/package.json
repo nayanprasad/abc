@@ -12,7 +12,11 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
-    "api": "workspace:*",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.47.16",
+    "@tanstack/react-query": "^5.64.1",
+    "jose": "^5.9.6",
+    "jwt-decode": "^4.0.0",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"
