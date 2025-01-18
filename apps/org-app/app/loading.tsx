@@ -1,11 +1,5 @@
-import React from 'react';
-
 const Loading = () => {
-    return (
-        <div>
-            asdf
-        </div>
-    );
+  return null;
 };
 
 export default Loading;
