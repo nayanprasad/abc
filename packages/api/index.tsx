@@ -1,10 +1,5 @@
 import type { AxiosInstance } from "axios";
 import axios from "axios";
-import {
-  BillboardControllerApi,
-  OrganizationControllerApi,
-  UserControllerApi,
-} from "./src/axios";
 
 export class AxiosAPI {
   private static frontEndInstance: AxiosAPI;
@@ -25,7 +20,7 @@ export class AxiosAPI {
       AxiosAPI.frontEndAxiosInstance = axios.create({
         baseURL: process.env.NEXT_PUBLIC_API_URL,
         headers: {
-          "X-Organization-ID": localStorage.getItem("organizationId"),
+          "X-Room-ID": localStorage.getItem("roomId"),
         },
       });
 
@@ -50,25 +45,25 @@ export class AxiosAPI {
     return AxiosAPI.backendInstance;
   }
 
-  public userService: UserControllerApi;
-  public organizationService: OrganizationControllerApi;
-  public billboardService: BillboardControllerApi;
+  // public userService: UserControllerApi;
+  // public organizationService: OrganizationControllerApi;
+  // public billboardService: BillboardControllerApi;
 
   constructor() {
-    this.userService = new UserControllerApi(
-      undefined,
-      AxiosAPI.baseApiUrl,
-      AxiosAPI.frontEndAxiosInstance,
-    );
-    this.organizationService = new OrganizationControllerApi(
-      undefined,
-      AxiosAPI.baseApiUrl,
-      AxiosAPI.frontEndAxiosInstance,
-    );
-    this.billboardService = new BillboardControllerApi(
-      undefined,
-      AxiosAPI.baseApiUrl,
-      AxiosAPI.frontEndAxiosInstance,
-    );
+    // this.userService = new UserControllerApi(
+    //   undefined,
+    //   AxiosAPI.baseApiUrl,
+    //   AxiosAPI.frontEndAxiosInstance,
+    // );
+    // this.organizationService = new OrganizationControllerApi(
+    //   undefined,
+    //   AxiosAPI.baseApiUrl,
+    //   AxiosAPI.frontEndAxiosInstance,
+    // );
+    // this.billboardService = new BillboardControllerApi(
+    //   undefined,
+    //   AxiosAPI.baseApiUrl,
+    //   AxiosAPI.frontEndAxiosInstance,
+    // );
   }
 }

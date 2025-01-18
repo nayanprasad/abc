@@ -4,8 +4,7 @@
   "main": "./index.tsx",
   "types": "./index.tsx",
   "scripts": {
-    "lint": "eslint .",
-    "generate-models-local": "openapi-generator-cli generate -i http://localhost:8080/v3/api-docs -g typescript-axios -o ./src/axios --skip-validate-spec"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
