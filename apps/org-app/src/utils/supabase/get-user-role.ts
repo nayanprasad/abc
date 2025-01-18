@@ -2,7 +2,8 @@ import "server-only";
 
 import { JWTPayload, jwtVerify } from "jose";
 
-import { createClient } from "./server";
+import useSupabaseServer from "./server-client";
+import { cookies } from "next/headers";
 
 // Extend the JWTPayload type to include Supabase-specific metadata
 type SupabaseJwtPayload = JWTPayload & {
@@ -12,8 +13,9 @@ type SupabaseJwtPayload = JWTPayload & {
 };
 
 export async function getUserRole() {
+  const cookieStore = await cookies();
   // Create a Supabase client for server-side operations
-  const supabase = await createClient();
+  const supabase = useSupabaseServer(cookieStore);
 
   // Retrieve the current session
   const {

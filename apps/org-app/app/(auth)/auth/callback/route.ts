@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-import { createClient } from "../../../src/utils/supabase/server"
+import { createClient } from "../../../../src/utils/supabase/server-client"
 
 export async function GET(request: Request) {
   // Extract search parameters and origin from the request URL

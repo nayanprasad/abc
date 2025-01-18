@@ -1,58 +1,21 @@
-import type { JwtPayload } from "jwt-decode";
-import { jwtDecode } from "jwt-decode";
-import { createClient } from "../utils/supabase/client";
+import useSupabaseBrowser from "../utils/supabase/browser-client";
 import { useQuery } from "@tanstack/react-query";
+import { useQuery as usePostgrestQuery } from "@supabase-cache-helpers/postgrest-react-query";
+import { getUserById } from "../utils/supabase/queries";
+import { getCurrentUser } from "../utils/supabase/queries/user-queries";
 
-type SupabaseJwtPayload = JwtPayload & {
-  app_metadata: {
-    role: string;
-  };
-};
-
-export function useGetUser() {
-  const supabase = createClient();
+export function useGetCurrentUser() {
+  const supabase = useSupabaseBrowser();
   return useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession();
-      if (error) throw error;
-
-      if (session) {
-        const decodedJwt = jwtDecode<SupabaseJwtPayload>(session.access_token);
-        return {
-          session,
-          user: session.user,
-          role: decodedJwt.app_metadata.role,
-        };
-      }
-    },
+    queryKey: ["currentUser"],
+    queryFn: () => getCurrentUser(supabase),
     staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
     refetchOnWindowFocus: true,
     retry: false,
   });
 }
 
-export async function signInWithGoogle({
-  next,
-}: {
-  next?: string | undefined | null;
-}) {
-  const supabase = createClient();
-  try {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback${
-          next ? `?next=${encodeURIComponent(next)}` : ""
-        }`,
-      },
-    });
-
-    if (error) {
-      throw error;
-    }
-  } catch (error) {}
+export function useGetUserById(id: string) {
+  const supabase = useSupabaseBrowser();
+  return usePostgrestQuery(getUserById(supabase, id));
 }
