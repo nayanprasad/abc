@@ -1,4 +1,4 @@
-import { TypedSupabaseClient } from "../../../../types/supabase/types";
+import { TypedSupabaseClient } from "../../../types/supabase/types";
 import { jwtDecode, type JwtPayload } from "jwt-decode";
 
 type SupabaseJwtPayload = JwtPayload & {

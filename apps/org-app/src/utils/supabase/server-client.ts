@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { Database } from "../../../types/supabase/database.types";
+import { Database } from "../../types/supabase/database.types";
 import { UnsafeUnwrappedCookies } from "next/dist/server/request/cookies";
 
 export default function useSupabaseServer(cookieStore: UnsafeUnwrappedCookies) {
