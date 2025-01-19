@@ -39,7 +39,7 @@ export default function Home() {
       >
         Sign out
       </Button>
-      {data?.session.user.email}
+      {data?.session?.user.email}
     </div>
   );
 }

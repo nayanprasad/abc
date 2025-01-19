@@ -26,13 +26,13 @@ export async function getCurrentUser(client: TypedSupabaseClient) {
     data: { session },
     error,
   } = await client.auth.getSession();
-  if (error) throw error;
-
-  if (session) {
-    const decodedJwt = jwtDecode<SupabaseJwtPayload>(session.access_token);
-    return {
-      session,
-      role: decodedJwt.app_metadata.role,
-    };
+  if (error || !session) {
+    return { session: null, role: null };
   }
+
+  const decodedJwt = jwtDecode<SupabaseJwtPayload>(session.access_token);
+  return {
+    session,
+    role: decodedJwt.app_metadata.role,
+  };
 }
