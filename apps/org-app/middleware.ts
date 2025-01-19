@@ -1,11 +1,12 @@
-import { type NextRequest } from "next/server";
+import { chain } from "./middlewares/chain";
+import { withAuthMiddleware } from "./middlewares/authMiddleware";
+import { withSubdomainMiddleware } from "./middlewares/subdomainMiddleware";
 
-import { updateSession } from "../org-app/src/utils/supabase/middleware";
 
-export async function middleware(request: NextRequest) {
-    return await updateSession(request);
-}
+export default chain([withSubdomainMiddleware, withAuthMiddleware])
 
 export const config = {
-    matcher: ["/protected", "/login", "/admin/:path*"],
+    matcher: [
+        "/((?!api|_next/static|_next/image|.*\\.jpg|.*\\.png|.*\\.ico|.*\\.svg).*)",
+    ],
 };
